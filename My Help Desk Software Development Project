@@ -1,0 +1,327 @@
+#IT Help Desk Ticketing Tool/Software
+#Project by: Marjhori Morales Aparri
+#Friday, 21st April 2023
+
+#1.Staff registration
+import time#This is a sleep() function code.
+import random
+import re #This input will be using a regular expression operations.
+
+#Lists for staff registration
+staff_name=[]
+staff_lastname=[]
+staff_cpasswrd=[]
+staff_id=[]
+contact_email = []
+
+
+def registration_main():#Registration for staff
+    def name():#This is staff's full name input.
+        staff_name.append(input("First name: ").title())#Staff's first name input
+        staff_lastname.append(input("Last name: ").title())
+
+    def staff_pass():#Staff's password of choice.
+
+        staff_npasswrd = input("New Password: ")#Staff's password input.
+        staff_cpasswrd.append(input("Confirm Password: "))#Staff's password confirmation.
+
+        if staff_npasswrd not in staff_cpasswrd:#If confirm password does not matched with the new password input, user will re-type the password.
+            print(">>> Password not matched. Please try again.")
+            staff_pass()
+            
+    def date():#Staff's date of birth information.
+        
+        import datetime#So that the date code will work.
+        
+        try:
+            dob = input("Date of Birth(dd/mm/yyyy): ")#Date of birth must use this date standard dd/mm/yyyy
+            
+            staff_birthdate = datetime.datetime.strptime(dob,"%d/%m/%Y").date()
+        
+        except ValueError:#If date format not followed.
+            print(">>> Use this date format(dd/mm/yyyy). Please try again.")
+            date()
+        
+    def i_d():#Staff's id of choice.
+        staff_id.append(input("Create your id: ").title())
+        
+    def contact():#Staff's contact number. Preferably mobile number in New Zealand code (64+).
+        
+        try:
+            staff_contactn = int(input("Mobile number (no space): +64"))#User mobile number with automatic New Zealand number code (64+).
+        
+        except ValueError:#Letters or any invalid mobile number will be automatically disable. 
+            print(">>> Invalid mobile number. Please try again.")
+            contact()
+            
+        else:
+            if len(str(staff_contactn)) > 9:#From "Mobile number" input using 'int' (integer) translate to a 'str' (string): If number is more than 9.
+                print (">>> Your contact number must be less than 12 digits. Please try again.")
+                contact()
+                
+            elif len(str(staff_contactn)) < 9:#If number is lesser than official mobile number.
+                print (">>> Your contact number must be 12 digits. Please try again.")
+                contact()
+            
+    def email():#Staff's email info.
+        
+        import re#This input will be using a regular expression operations.
+        
+        email_format: str = r"(^[a-zA-Z0-9'_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"#Allowed characters within the email.
+        
+        staff_email = input(str("Email: "))#'Email' input.
+        
+        
+        if not re.match(email_format, staff_email, re.IGNORECASE):#If 'Email' input does not matched with the 'email_format' variable. User will received error message.
+            print(">>> Invalid email! Try again!")
+            email()
+    
+    name()#from staff's fullname function.
+    staff_pass()#password function
+    date()#date of birth funtion
+    i_d()#id function
+    contact()#mobile number function
+    email()#email function
+    
+    print ('')#Just space during output result.
+
+    print("loading.")#Loading message
+    time.sleep(2)#From 'import time' sleep () funtion.
+
+    print("loading..")
+    time.sleep(2)
+
+    print("loading...")
+    time.sleep(2)
+
+    print("loading....")
+    time.sleep(2.5)
+
+    print ('')#Another space
+
+    print("Registration complete...")#This message to aware the staff is officiall registered in this Ticketing System Tool/Software. Staff information will be saved. 
+
+    print ('')
+    
+    
+def log_in():#log in information for staff users
+    
+    staff_id2 = input("Staff id: ")
+    if staff_id2 not in staff_id:
+        menu = input(">>> Invalid username. You must be registered or enter the wrong username. Please 'a' to try again or 'b' to go back the menu: ")
+        if menu == 'a':
+            log_in()
+        elif menu == 'b':
+            main()
+        else:
+            print(">>> Invalid option. Please 'a' to try again or 'n' to go back the menu:")
+            
+    staff_passwrd = input("Password: ")
+    if staff_passwrd not in staff_cpasswrd:
+        print(">>> Invalid or worng password. Please try again or contact the admin if password forgotten.")
+        log_in()
+
+    else:
+        print('')
+        print(">>> Welcome", staff_name,"! You are now logged in!")
+        print("[a] Tickets\n[b] log out ")
+        
+        logged = input(">>> ")
+        
+        if logged == 'a':
+            welcome_staff()
+            
+        elif logged == 'b':
+            print('')
+            print("Logging out...")
+            time.sleep(2)
+            main()
+       
+        else:
+            print("Invalid option. Please choose a,b or c only.")
+
+def welcome_staff():#If staff successfully logged in, staff can access the ticket system
+                print("[a] Add New Ticket\n[b] Ticket Status\n[c] Edit Tickets")
+                print('')
+                logged_2 = input(">>> ")
+                
+                if logged_2 == 'a':
+                    print('')
+                    
+                    #Lists for creating numbers of saved tickets (sorry unable to finished on time so not working)
+                    ticket=[]
+                    creator=[]
+                    emails=[]
+                    description2=[]
+                    responses=[]
+
+                    #Counting ticket solved or to be solved and numbers of tickets printed
+                    ticket_number = 1000
+                    ticket_created = 0
+                    ticket_solved = 0
+                    ticket_to_be_solved = 0
+
+                    choice = 'y'
+                    while choice == 'y':
+                        class staffid: #Use for ticket registration before printing the whole requirements
+                            def __init__(self,name): 
+                                self.name = name
+                                
+                        class creatorsname:
+                            def __init__(self,creator): #Use for regestering caller's name
+                                self.name = creator
+                            
+                            def __str__(self): #using strings so that input can print the screen
+                                return f"{self.name}"
+
+                        
+                        class contactemail:#Caller's email address
+                            def __init__(self,email):
+                                self.email = email
+
+                            def __str__(self):
+                                return f"{self.name}"
+
+                            
+                        class description:#Description of caller's technical complaints
+                            def __init__(self,description):
+                                self.description = description
+
+                            
+                        class response:#This is for staff user's response if issue is resolved
+                            def __init__(self,response):
+                                self.response = response
+                                
+                            def __str__(self):
+                                return f"{self.name}"
+
+
+                            
+                        print('') 
+                        
+                        staff_id = staffid("Marge7892")
+                        print("Staff ID:",staff_id.name)
+
+                        creator_name = creatorsname
+                        creator_name = input ("Creator's name: ")
+                        ticket_number += 1 #Ticket number count
+                        ticket_created += 1#Number of ticket created
+
+
+                        while True:
+                            email = contactemail
+                            
+                            email = input("Contact Email: ")#caller's email input
+                            
+                            #These are allowed characters within the email.
+                            email_format: str = r"(^[a-zA-Z0-9'_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+                            
+                            if not re.match(str(email_format),email, re.IGNORECASE):#If 'Email' input does not matched with the 'email_format' variable. User will received error message.
+                                print(">>> Invalid email! Try again!")
+                                email = True
+                            else:
+                                descriptions = description
+                                descriptions = input ("Description of issue: ").lower()#Input for Description of technical issues
+                                if "password" in descriptions:#if password word typed in description input, program automaticall created password for users
+                                    staff_id2 =(staff_id.name[:2])
+                                    creatorname =(creator_name[:3]) 
+                                    passchange = staff_id2 + creatorname
+                                    
+                                else:
+                                    passchange = print("-No password change needed-")#if description does not need password
+                                break
+
+                        user_response = response
+                        user_response = input("Response: ")#response input
+                        
+
+                        print('---------------------')
+                        print('')
+
+                        print("Ticket No:",ticket_number)#printing ticket number automatically 
+                        ticket.append(ticket_number)#Append...ticket will be registered and saved within the system
+                        
+                        print("Creator's ID: ",creator_name)#input will be printed on the screen
+                        creator.append(creator_name)
+                        
+                        print("Contact Email:", email)
+                        emails.append(email)
+                        
+                        print("Description of issue:", descriptions,"","[Temporary Password:",passchange,"]")
+                        description2.append(descriptions)
+                        
+                        if user_response == (""):
+                            print("Response: Not Yet Provided.\nTicket Status: OPEN")#if ticket is blank, will print automatically to not yet provided and ticket status will be open
+                            ticket_to_be_solved += 1#count ticket to be solved
+                            responses.append(user_response)
+                           
+                        else:
+                            print("Response: ",user_response,"\nTicket Status: CLOSED")
+                            ticket_solved += 1
+                            responses.append(user_response)
+
+                        print('')
+                        print('---------------------')
+                        print('')
+                        
+                        #ticket status will be printed on screen
+                        print("---------\nTickets Created: ",ticket_created)
+                        print("Tickets solved: ",ticket_solved)
+                        print("Tickets to be Solved: ",ticket_to_be_solved,"\n---------")
+
+                        print('')
+                        
+                        #If staff user wants to add ticket or not
+                        choice = input("Add more ticket (y/n)? ").lower()
+                        if choice == 'n':# if user choose 'n' that means no so user will return to menu
+                            
+                            print('')
+                            print("Returning to main page...")
+                            time.sleep(2.5)
+                            welcome_staff()
+        
+            
+#This is the main menu for staff registration or other menu options
+def main():
+    
+    print("Welcome! Please register first before logging in to the system. Press 'b' to log in if regestered, 'c' for help or 'q' to quit.")
+    print("[a] Staff registration\n[b] Log in\n[c] Help (?)\n[q] Quit")
+    
+    print('')
+
+    main_option=input(">>> ").lower()
+
+    if main_option == 'a':
+        registration_main()
+        log_in()
+        
+    elif main_option == 'b':
+        log_in()
+        
+    elif main_option == 'c':
+        print(">>> Please contact the admin for any questions or issues:\nEmail: admin@gmail.co.nz \nContact no: 098666-666 ")
+        print('')
+        
+        menu_2 = input("[Press 'b' to return the menu or press any key to exit.]")
+        
+        if menu_2 == 'b':
+            main()
+            
+        else:
+            print('')
+            print(">>> Program exiting...")
+            time.sleep(2.5)
+            quit()
+            
+        
+    elif main_option == 'q':
+        print('')
+        print(">>> Program exiting...")
+        time.sleep(2.5)
+        quit()
+        
+    else:
+        print("Invalid option. Please try again")
+        main_option
+main() #will show main menu first when program is open
+
