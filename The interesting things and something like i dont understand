@@ -1,0 +1,77 @@
+
+
+#Codes that interest me: Staff's Date of birth and contact number
+
+def date(): #Staff's date of birth information.
+        
+    import datetime #So that the date code will work.
+
+    try:
+        dob = input("Date of Birth(dd/mm/yyyy): ")#Date of birth must use this date standard dd/mm/yyyy
+
+        staff_birthdate = datetime.datetime.strptime(dob,"%d/%m/%Y").date()
+
+    except ValueError:#If date format not followed.
+        print(">>> Use this date format(dd/mm/yyyy). Please try again.")
+        date()
+        
+    
+
+def contact(): #Staff's contact number. Preferably mobile number in New Zealand code (64+).
+
+      try:
+          staff_contactn = int(input("Mobile number (no space): +64"))#User mobile number with automatic New Zealand number code (64+).
+
+      except ValueError:#Letters or any invalid mobile number will be automatically disable. 
+          print(">>> Invalid mobile number. Please try again.")
+          contact()
+
+      else:
+          if len(str(staff_contactn)) > 9:#From "Mobile number" input using 'int' (integer) translate to a 'str' (string): If number is more than 9.
+              print (">>> Your contact number must be less than 12 digits. Please try again.")
+              contact()
+
+          elif len(str(staff_contactn)) < 9:#If number is lesser than official mobile number.
+              print (">>> Your contact number must be 12 digits. Please try again.")
+              contact()
+              
+              
+              
+              
+              
+#Code that difficult or had hard time to understand (dictionary command using classes and objects.
+
+
+creator=[] #This is list for caller's name
+
+class creatorsname: #The creator's blueprint
+    def __init__(self,creator): #Use for regestering caller's name
+        self.name = creator
+
+    def __str__(self): #using strings so that input can print the screen
+        return f"{self.name}"
+
+creator_name = creatorsname #creatorsname convert name to creator_name
+creator_name = input ("Creator's name: ")
+ticket_number += 1 #Ticket number count
+ticket_created += 1 #Number of ticket created
+
+ print("Creator's ID: ",creator_name) #input will be printed on the screen
+ creator.append(creator_name) #add to list creator from creator_name input
+ 
+ 
+ 
+ #This code wasn't included because i was running out of time and code didn't work during running code for test. 
+ #Convert list (creator=[]) to dictionary sample code
+ 
+ def convert(creator):
+     it = iter(creator)
+     dct = dict(zip(it))
+     return dct #but code fail to run (based on my research: https://www.geeksforgeeks.org/python-convert-a-list-to-dictionary/)
+     
+ 
+ #if user type creator's name, the ticketing information will open. Unfortunately code didn't work and decided to end at april 21.
+ 
+print(convert(craetor))
+ 
+ 
