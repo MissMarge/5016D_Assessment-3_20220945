@@ -1,0 +1,54 @@
+
+
+#Codes that I've practised hard (This is printing ticketing section codes):
+
+
+#Creating blueprint for 'descrition' and 'response' ticket requirements
+
+class description: #Description of caller's technical complaints
+    def __init__(self,description):
+        self.description = description
+
+                            
+class response:#This is for staff user's response if issue is resolved
+    def __init__(self,response):
+        self.response = response
+
+    def __str__(self):
+        return f"{self.name}"
+        
+        
+        
+        
+#User typing their inputs
+
+descriptions = description #Converting the name description to descriptions
+descriptions = input ("Description of issue: ").lower()#Input for Description of technical issues
+if "password" in descriptions:#if password word typed in description input, program automaticall created password for users
+  staff_id2 =(staff_id.name[:2])
+  creatorname =(creator_name[:3]) 
+  passchange = staff_id2 + creatorname
+
+else:
+  passchange = print("-No password change needed-")#if description does not need password
+
+
+user_response = response #Converting the name response to user_response
+user_response = input("Response: ")#response input
+
+
+
+#Printing all inputs of description and response (sample ticket requirements information)
+
+print("Description of issue:", descriptions,"","[Temporary Password:",passchange,"]")
+description2.append(descriptions)
+
+if user_response == (""):
+    print("Response: Not Yet Provided.\nTicket Status: OPEN")#if ticket is blank, will print automatically to not yet provided and ticket status will be open
+    ticket_to_be_solved += 1#count ticket to be solved
+    responses.append(user_response)
+
+else:
+    print("Response: ",user_response,"\nTicket Status: CLOSED")
+    ticket_solved += 1
+    responses.append(user_response)
